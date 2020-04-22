@@ -38,6 +38,19 @@ services:
         aliases:
           - grafana
 
+  consul:
+    image: consul
+    ports:
+      - 8500:8500
+    environment:
+      - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true}'
+    command: 'agent -server -bootstrap-expect=1 -client=0.0.0.0 -bind 0.0.0.0 -ui'
+    hostname: consul
+    networks:
+      net:
+        aliases:
+          - consul
+
 networks:
   net:
 

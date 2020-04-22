@@ -15,6 +15,9 @@ scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
     metrics_path: /actuator/prometheus
-    static_configs:
-      # remote url.
-      - targets: ['localhost:8088']
+    consul_sd_configs:
+      - server: 'consul:8500' # consul url
+        tags: ["zone=int"]    # filter apps by zone tag, Optional but recommended for filter consul as service
+    relabel_configs:
+      - source_labels: [__meta_consul_service]  # relabel __meta_consul_service -> application
+        target_label:  application
