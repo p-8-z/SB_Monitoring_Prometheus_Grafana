@@ -45,7 +45,8 @@ All configuration is in `prometheus.yml` file.
 
 ## Grafana
 
-The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More 
+The tool for beautiful monitoring and metric analytics & dashboards for Graphite, 
+InfluxDB & Prometheus & More 
 
 [Page](https://grafana.com)
 
@@ -53,19 +54,34 @@ The tool for beautiful monitoring and metric analytics & dashboards for Graphite
 
 [Github](https://github.com/grafana/grafana)
 
+
+## Consul
+
+Distributed, highly available, and data center aware solution 
+to connect and configure applications across dynamic, distributed infrastructure.
+
+[Page](https://www.consul.io)
+
+[Configuration](https://www.consul.io/docs/agent/options.html)
+
+[Github](https://github.com/hashicorp/consul)
+
 ## How to
 
 Add libraries to your Spring Applications.
 
-Configure `prometheus.yml` so it points to Spring Prometheus Actuators
+Configure `prometheus.yml` so its Gathering services from Consul Service Discovery and
+requesting data from Services Actuator.
 ```yaml
 scrape_configs:
   - job_name: 'prometheus'
     metrics_path: /actuator/prometheus
-    static_configs:
-      - targets: ['localhost:8088']
+    consul_sd_configs:
+      - server: 'consul:8500'
+    relabel_configs:
+      - source_labels: [__meta_consul_service]
+        target_label:  application
 ```
-
 Start Docker-Compose
 ```cmd
 docker-compose up
