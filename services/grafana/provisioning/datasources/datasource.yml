@@ -1,50 +1,30 @@
-# config file version
-apiVersion: 1
+apiVersion: 1                   # config file version
 
-# list of datasources that should be deleted from the database
-deleteDatasources:
+deleteDatasources:              # list of datasources that should be deleted from the database
   - name: Prometheus
     orgId: 1
 
-# list of datasources to insert/update depending
-# whats available in the database
-datasources:
-  # <string, required> name of the datasource. Required
-  - name: Prometheus
-    # <string, required> datasource type. Required
-    type: prometheus
-    # <string, required> access mode. direct or proxy. Required
-    access: proxy
-    # <int> org id. will default to orgId 1 if not specified
-    orgId: 1
-    # <string> url
-    url: http://prometheus:9090
-    # <string> database password, if used
-    password:
-    # <string> database user, if used
-    user:
-    # <string> database name, if used
-    database:
-    # <bool> enable/disable basic auth
-    basicAuth: false
-    # <string> basic auth username, if used
-    basicAuthUser:
-    # <string> basic auth password, if used
-    basicAuthPassword:
-    # <bool> enable/disable with credentials headers
-    withCredentials:
-    # <bool> mark as default datasource. Max one per org
-    isDefault: true
-    # <map> fields that will be converted to json and stored in json_data
-    jsonData:
+datasources:                    # list of datasources to insert/update depending
+  - name: Prometheus            # <string, required> name of the datasource. Required
+    type: prometheus            # <string, required> datasource type. Required
+    access: proxy               # <string, required> access mode. direct or proxy. Required
+    orgId: 1                    # <int> org id. will default to orgId 1 if not specified
+    url: http://prometheus:9090 # <string> url
+    password:                   # <string> database password, if used
+    user:                       # <string> database user, if used
+    database:                   # <string> database name, if used
+    basicAuth: false            # <bool> enable/disable basic auth
+    basicAuthUser:              # <string> basic auth username, if used
+    basicAuthPassword:          # <string> basic auth password, if used
+    withCredentials:            # <bool> enable/disable with credentials headers
+    isDefault: true             # <bool> mark as default datasource. Max one per org
+    jsonData:                   # <map> fields that will be converted to json and stored in json_data
       graphiteVersion: "1.1"
       tlsAuth: false
       tlsAuthWithCACert: false
-    # <string> json object of data that will be encrypted.
-    secureJsonData:
+    secureJsonData:             # <string> json object of data that will be encrypted.
       tlsCACert: "..."
       tlsClientCert: "..."
       tlsClientKey: "..."
     version: 1
-    # <bool> allow users to edit datasources from the UI.
-    editable: true
+    editable: true              # <bool> allow users to edit datasources from the UI.

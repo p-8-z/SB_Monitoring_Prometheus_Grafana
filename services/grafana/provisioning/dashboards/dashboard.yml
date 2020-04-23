@@ -1,11 +1,10 @@
 apiVersion: 1
-
 providers:
-  - name: 'Prometheus'
-    orgId: 1
-    folder: ''
-    type: file
-    disableDeletion: false
-    editable: true
+  - name: 'Prometheus'                            # <string> an unique provider name
+    orgId: 1                                      # <int> org id. will default to orgId 1 if not specified
+    folder: ''                                    # <string, required> name of the dashboard folder. Required
+    type: file                                    # <string, required> provider type. Required
+    disableDeletion: false                        # <bool> disable dashboard deletion
+    editable: true                                # <bool> enable dashboard editing
     options:
-      path: /etc/grafana/provisioning/dashboards
+      path: /etc/grafana/provisioning/dashboards  # <string, required> path to dashboard files on disk. Required

@@ -1,16 +1,13 @@
 global:
-  scrape_interval:     15s # How frequently to scrape targets by default.
-  evaluation_interval: 15s # How long until a scrape request times out.
-  # Attach these labels to any time series or alerts when communicating with external systems
-  external_labels:
+  scrape_interval:     15s                      # How frequently to scrape targets from this job.
+  external_labels:                              # The labels to add when communicating with external system
     monitor: 'my-project'
-# A scrape configuration containing exactly one endpoint to scrape
-scrape_configs:
-  - job_name: 'prometheus'              # The job name assigned to scraped metrics
-    metrics_path: /actuator/prometheus  # The HTTP resource path on which to fetch metrics from targets.
-    consul_sd_configs:                  # The information to access the Consul API.
-      - server: 'consul:8500'
-        tags: ["zone=int"]              # An optional list of tags used to filter nodes for a given service.
-    relabel_configs:
-      - source_labels: [__meta_consul_service]  # relabel __meta_consul_service -> application
+scrape_configs:                                 # A list of scrape configurations.
+  - job_name: 'prometheus'                      # The job name assigned to scraped metrics by default.
+    metrics_path: /actuator/prometheus          # The HTTP resource path on which to fetch metrics from targets.
+    consul_sd_configs:                          # List of Consul service discovery configurations.
+      - server: 'consul:8500'                   # Consul API URL
+        tags: ["zone=int"]                      # An optional list of tags used to filter nodes for a given service.
+    relabel_configs:                            # List of relabel configurations.
+      - source_labels: [__meta_consul_service]  # Relabel: __meta_consul_service -> application
         target_label:  application
