@@ -5,31 +5,7 @@ containing Prometheus, Grafana to monitor your Spring infrastructure.
 
 ## Spring Apps
 
-Maven dependencies:
-```xml
-<dependencies>
-    ...
-    <!--   Actuator Starter     -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-    <!--   Micrometer Dependecies     -->
-    <dependency>
-        <groupId>io.micrometer</groupId>
-        <artifactId>micrometer-core</artifactId>
-        <version>${micrometer.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>io.micrometer</groupId>
-        <artifactId>micrometer-registry-prometheus</artifactId>
-        <version>${micrometer.version}</version>
-    </dependency>
-    ...
-</dependencies>
-```
-
-That exposes actuator on url `/actuator/prometheus`
+Should expose actuator on url `/actuator/prometheus`
 
 ## Prometheus
 
@@ -69,6 +45,28 @@ to connect and configure applications across dynamic, distributed infrastructure
 ## How to
 
 Add libraries to your Spring Applications.
+```xml
+<dependencies>
+    ...
+    <!--   Actuator Starter     -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <!--   Micrometer Dependecies     -->
+    <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-core</artifactId>
+        <version>${micrometer.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-registry-prometheus</artifactId>
+        <version>${micrometer.version}</version>
+    </dependency>
+    ...
+</dependencies>
+```
 
 Configure `prometheus.yml` so its Gathering services from Consul Service Discovery and
 requesting data from Services Actuator.
